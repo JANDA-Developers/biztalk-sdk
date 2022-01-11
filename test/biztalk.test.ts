@@ -19,9 +19,27 @@ describe('sendKakaoTest', () => {
     await BIZ.sendAlimTalk({
       message: 'BizTalk Test 민재',
       msgIdx: 'clientTestId' + Math.floor(Math.random() * 100),
-      recipient: '',
-      title: 'HelloBizTalk',
+      recipient: '01075886079',
       tmpltCode: 'HelloBizTalk',
+      resMethod: 'PUSH',
+      countryCode: "82",
+      useFailback:"N",
     });
   });
 });
+
+
+// describe('sendKakaoTest', () => {
+//   it('works', async () => {
+//     await BIZ.sendAlimTalkBatch({
+//       message: 'BizTalk Test 민재',
+//       msgIdx: 'clientTestId' + Math.floor(Math.random() * 100),
+//       recipient: '01075886079',
+//       title: 'HelloBizTalk',
+//       tmpltCode: 'HelloBizTalk',
+//       resMethod: 'PUSH',
+//       countryCode: "82",
+//       useFailback:"N",
+//     });
+//   });
+// });

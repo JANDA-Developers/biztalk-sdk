@@ -34,20 +34,23 @@ export declare module BIZTALK {
     bsid: string;
     passwd: string;
     expire?: number; // 60 ~ 1440
+    
   }
   export interface ISendAlimParams {
     msgIdx: string; // 메시지 고유값 사용자 측에서 고유한 값으로 관리되어야 한다
-    countryCode?: string; // = 82
+    msgList?: any;
+    countryCode: string; // = 82
     recipient: string;
     senderKey?: string;
     appUserId?: string;
     message: string;
     tmpltCode: string;
-    title: string;
+    title?: string;
     resMethod?: string; // = PUSH
-    useFailback?: 'N' | 'Y'; // 문자재처리
+    useFailback: 'N' | 'Y'; // 문자재처리
     mmsAttach?: string; //
     supplement?: string;
+    
     attach?: Button.TAttachment;
   }
 }
