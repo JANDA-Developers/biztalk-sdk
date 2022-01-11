@@ -1,6 +1,35 @@
-type NORY = 'N' | 'Y';
+export declare module BIZTALK {
+  module Button {
+    export interface IButtonCommon {
+      type: ButtonTypes;
+    }
 
-export declare module Params {
+    export interface WS extends IButtonCommon {
+      type: ButtonTypes.WL;
+      url_mobile: string;
+      url_pc?: string;
+    }
+
+    export interface DS extends IButtonCommon {}
+
+    export type TButton = WS | DS;
+    export type TAttachment = {
+      button: TButton[];
+      name: string; // 버튼제목
+      type: string; // 버튼타입
+      scheme_android?: string;
+      scheme_ios?: string;
+      url_mobile?: string;
+      url_pc?: string;
+      chat_extra?: string;
+      chat_event?: string;
+      plugin_id?: string;
+      reply_id?: string;
+      oneclick_id?: string;
+      product_id?: string;
+    };
+  }
+
   export interface IGetTokenParams {
     bsid: string;
     passwd: string;
@@ -19,42 +48,8 @@ export declare module Params {
     useFailback?: 'N' | 'Y'; // 문자재처리
     mmsAttach?: string; //
     supplement?: string;
-    attach?: TAttachment;
+    attach?: Button.TAttachment;
   }
-}
-
-export declare module BIZTALK {
-  declare module Button {
-    export interface IButtonCommon {
-      type: ButtonTypes;
-    }
-
-    export interface WS extends IButtonCommon {
-      type: ButtonTypes.WL;
-      url_mobile: string;
-      url_pc?: string;
-    }
-
-    export interface DS extends IButtonCommon {}
-
-    export type TButton = WS | DS;
-  }
-
-  export type TAttachment = {
-    button: TButton[];
-    name: string; // 버튼제목
-    type: string; // 버튼타입
-    scheme_android?: string;
-    scheme_ios?: string;
-    url_mobile?: string;
-    url_pc?: string;
-    chat_extra?: string;
-    chat_event?: string;
-    plugin_id?: string;
-    reply_id?: string;
-    oneclick_id?: string;
-    product_id?: string;
-  };
 }
 
 export enum ResponseCode {

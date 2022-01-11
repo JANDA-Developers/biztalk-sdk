@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Paths, TCallKey } from './const';
-import { Params, Response, ResponseCode } from './type';
+import { BIZTALK, Response, ResponseCode } from './type';
 
 export class BizTalk {
   private token: string = '';
@@ -47,10 +47,11 @@ export class BizTalk {
   }
 
   public async getToken() {
-    const data: Params.IGetTokenParams = {
+    const data: BIZTALK.IGetTokenParams = {
       bsid: this.bsid,
       passwd: this.passwd,
     };
+    // 발신 컴퓨터 ip biztalk
     const result = await this.call<Response.GetTokenResponse>('getToekn', data);
     this.token = result.token;
     const hour23 = 1000 * 60 * 60 * 23;
@@ -60,7 +61,16 @@ export class BizTalk {
     return result;
   }
 
-  public sendAlimTalk(params: Params.ISendAlimParams) {
+  public sendAlimTalk(params: BIZTALK.ISendAlimParams) {
+    const _params = {
+      ...params,
+      senderKey: params.senderKey || this.senderKey,
+    };
+    if (!_params.senderKey) throw Error('must provide senderKey');
+    return this.call<Response.GetTokenResponse>('sendAlimTalk', _params);
+  }
+
+  public sendAlimTalkBatch(params: BIZTALK.ISendAlimParams) {
     const _params = {
       ...params,
       senderKey: params.senderKey || this.senderKey,

@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 
 dotenv.config({
-  path: path.resolve(__dirname, './.env'),
+  path: path.resolve(__dirname, '../.env'),
 });
 
 const BIZ = new BizTalk();
@@ -17,11 +17,11 @@ describe('tokenGetTest', () => {
 describe('sendKakaoTest', () => {
   it('works', async () => {
     await BIZ.sendAlimTalk({
-      message: '',
-      msgIdx: '',
+      message: 'BizTalk Test 민재',
+      msgIdx: 'clientTestId' + Math.floor(Math.random() * 100),
       recipient: '',
-      title: '',
-      tmpltCode: '',
+      title: 'HelloBizTalk',
+      tmpltCode: 'HelloBizTalk',
     });
   });
 });
