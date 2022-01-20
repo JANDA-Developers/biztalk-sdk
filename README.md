@@ -10,7 +10,6 @@ code: HelloBizTalk
 
 비즈톡 계정
 [https://center.biztalk.co.kr/#/login]
-pinkroader / pwpink1!
 
 고객센터
 
