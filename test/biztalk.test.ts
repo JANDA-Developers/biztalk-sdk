@@ -15,19 +15,19 @@ describe('tokenGetTest', () => {
   });
 });
 
-// describe('sendKakaoTest', () => {
-//   it('works', async () => {
-//     await BIZ.sendAlimTalk({
-//       message: 'BizTalk Test 민재',
-//       msgIdx: 'clientTestId' + Math.floor(Math.random() * 100),
-//       recipient: '01075886079',
-//       tmpltCode: 'HelloBizTalk',
-//       resMethod: 'PUSH',
-//       countryCode: "82",
-//       useFailback:"N",
-//     });
-//   });
-// });
+describe('sendKakaoTest', () => {
+  it('works', async () => {
+    await BIZ.sendAlimTalk({
+      message: 'BizTalk Test 민재',
+      msgIdx: 'clientTestId' + Math.floor(Math.random() * 100),
+      recipient: '01075886079',
+      tmpltCode: 'HelloBizTalk',
+      resMethod: 'PUSH',
+      countryCode: "82",
+      useFailback:"N",
+    });
+  });
+});
 
 
 // 같은 번호로 할 시에는 한통만 카톡이 옴.
@@ -35,7 +35,8 @@ describe('tokenGetTest', () => {
 const itemList: BIZTALK.ISendAlimTalkBatch[] = [
   {
    message: 'BizTalk Test 민재',
-   msgIdx: 'clientTestId' + Math.floor(Math.random() * 100),
+    msgIdx: 'clientTestId' + Math.floor(Math.random() * 100),
+   title : '비즈톡 테스트',
    recipient: '01075886079',
    tmpltCode: 'HelloBizTalk',
    resMethod: 'PUSH',
