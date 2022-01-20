@@ -6,6 +6,10 @@ export class BizTalk {
   private token: string = '';
   private expireDate: number = 0;
 
+//   마이페이지 클릭
+// 메뉴 채널 관리 클릭
+// 발신프로필키 발급
+// 필수 입력값 기재 후 발신프로필 키 발급
   constructor(
     public bsid: string = process.env.BIZTALK_BSID,
     public passwd: string = process.env.BIZTALK_PASSWD,
@@ -35,23 +39,10 @@ export class BizTalk {
       },
     }
     )
-    console.log("data::", data);
-      
-    console.log("result::", result);
-    console.log("result::", result);
-    
-    //   .then(res => {
-    //   console.log(res.data);
-    // })
-    //   .catch((err) => {console.log("error", err)}
-    // )
 
     if (result.status !== 200) throw Error('통신에러');
     const resultData = result.data as Response.CommonResponse;
 
-    console.log("resultData",resultData);
-    
-    // console.log("resultData.responseCode",resultData.responseCode);
     
     if (resultData.responseCode !== ResponseCode.전송성공)
       throw Error(resultData.responseCode + ':' + resultData.msg);
@@ -73,25 +64,27 @@ export class BizTalk {
     const hour23 = 1000 * 60 * 60 * 23;
     const liveTerm = hour23;
     this.expireDate = new Date().valueOf() + liveTerm;
-
     return result;
   }
 
   public sendAlimTalk(params: BIZTALK.ISendAlimParams) {
     const _params = {
-  ...params,
+      ...params,
       senderKey: params.senderKey || this.senderKey,
     };
     if (!_params.senderKey) throw Error('must provide senderKey');
     return this.call<Response.GetTokenResponse>('sendAlimTalk', _params);
   }
 
-//   public sendAlimTalkBatch(params: BIZTALK.ISendAlimParams) {
-//     const _params = {
-//       ...params,
-//       senderKey: params.senderKey || this.senderKey,
-//     };
-//     if (!_params.senderKey) throw Error('must provide senderKey');
-//     return this.call<Response.GetTokenResponse>('sendAlimTalkBatch', _params);
-//   }
+  public sendAlimTalkBatch(params: BIZTALK.ISendAlimTalkBatch[]) {
+    params.map((p, index) => {
+      params[index].senderKey = p.senderKey || this.senderKey; 
+    });
+    if (!params.some((p) => p.senderKey)) throw Error('must provide senderKey');
+
+    const listResult =  {
+      "msgList" : params
+    }
+    return this.call<Response.GetTokenResponse>('sendAlimTalkBatch', listResult);
+  }
 }

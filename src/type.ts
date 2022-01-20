@@ -1,3 +1,5 @@
+
+
 export declare module BIZTALK {
   module Button {
     export interface IButtonCommon {
@@ -11,6 +13,7 @@ export declare module BIZTALK {
     }
 
     export interface DS extends IButtonCommon {}
+    
 
     export type TButton = WS | DS;
     export type TAttachment = {
@@ -47,13 +50,19 @@ export declare module BIZTALK {
     tmpltCode: string;
     title?: string;
     resMethod?: string; // = PUSH
-    useFailback: 'N' | 'Y'; // 문자재처리
-    mmsAttach?: string; //
+    useFailback?: 'N' | 'Y'; // 문자재처리
+    mmsAttach?: TmmsAttach; //
     supplement?: string;
-    
     attach?: Button.TAttachment;
   }
+
+ 
+
+  export interface ISendAlimTalkBatch extends ISendAlimParams {
+    messageType?: string;
+  } 
 }
+
 
 export enum ResponseCode {
   '전송성공' = '1000',
@@ -63,6 +72,13 @@ export enum ButtonTypes {
   'WL' = 'WL',
   'DS' = 'DS',
 }
+
+ export type TmmsAttach = {
+      mmsContent: string;
+      callback: string;
+      subject: string;
+  }
+
 
 export declare module Response {
   type CommonResponse = {
