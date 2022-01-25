@@ -31,7 +31,8 @@ describe('sendKakaoTest', () => {
 
 
 // 같은 번호로 할 시에는 한통만 카톡이 옴.
-//title 없으면 잘됨 
+// 템플릿은 강조표기형 템플릿이 아니기에 강조 표기 정보 값(title) 을 넣었을 때에는 실패가 되고 ​제거 했을 때에는 성공이 되고 있습니다.
+// 따라서, helloBizTalk 템플릿 사용 시, title 제거해줘야만 성공적으로 발송
 const itemList: BIZTALK.ISendAlimTalkBatch[] = [
   {
    message: 'BizTalk Test 민재',
